@@ -37,7 +37,7 @@ app.use(express.static(__dirname + '/public'));
 // ====================================
 
 // API ROUTES ------------------------
-var apiRoutes = require('./app/routes/api')(app, express);
+var apiRoutes = require('./app_server/routes/api')(app, express);
 app.use('/api', apiRoutes);
 
 // MAIN CATCHALL ROUTE --------------- 
@@ -49,5 +49,6 @@ app.get('*', function(req, res) {
 
 // START THE SERVER
 // ====================================
-app.listen(config.port);
-console.log('LET THE KREZA RUN ON ' + config.port);
+app.listen(config.port, function() {
+  console.log('LET THE KREZA RUN ON ' + config.port);
+});
