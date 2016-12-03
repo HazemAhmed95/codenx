@@ -5,8 +5,8 @@ angular.module('app.routes', ['ngRoute'])
 	$routeProvider
 
 		.when('/', {
-			templateUrl : 'app/views/pages/home.html',
-			controller  : 'mainController',
+			templateUrl : 'app/views/pages/products.html',
+			controller  : 'productController',
 			controllerAs: 'main'
 		});
 

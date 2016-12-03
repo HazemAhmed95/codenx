@@ -1,0 +1,18 @@
+<div class="col-md-4" ng-controller="productController" ng-repeat="product in products">
+    <div class="panel" >
+        <div class="panel-img" >
+            <img class="check" ng-src="{{getImagePath(product.imageName)}}">
+        </div>
+        <div class="info text-center"  >
+           
+            <h3>{{product.name}}</h3>
+            <p>Price:${{product.price}}</p>
+            
+            <br>
+            <div class="btn-group">
+                <a class="btn btn-default">View detail</a>
+                <a class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+            </div>
+        </div>
+    </div>
+</div>

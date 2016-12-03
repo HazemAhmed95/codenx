@@ -1,6 +1,12 @@
-angular.module('mainCtrl', [])
+angular.module('mainCtrl', ['app.services'])
 
-.controller('mainController', function() {
-	var vm = this;	
-	vm.message = 'this is my message!';
+.controller('productController', function($scope, Product) {
+  Product.get()
+       .then(function(res){
+          $scope.products = res.data; 
+      $scope.getImagePath = function(imageName) {
+return "images/" + imageName;
+};
+        });
 });
+
