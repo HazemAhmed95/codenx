@@ -580,7 +580,6 @@ p,h1,h2,h3,h4,h5,h6
 {
     font-size: 18px;
 }
-
 .cart-details
 {
     padding-top: 0%;
@@ -609,4 +608,72 @@ p,h1,h2,h3,h4,h5,h6
 .a-primary
 {
     color: #4fbfa8;
+}
+.categories li a
+{
+    color:#4fbfa8;
+    font-weight: 600;
+}
+.sub-categories li a
+{
+    font-size: 12px;   
+    font-weight: 600;
+    padding-top: 4%;
+    padding-left: 12%;
+    padding-right: 0%;
+    padding-bottom: 4%;
+    color: darkgray;
+}
+.ribbon
+{
+    top:0;
+    position: absolute;
+}
+.ribbon .ribbon-background
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.ribbon .theribbon
+{
+    position: relative;
+    width: 80px;
+    padding: 6px 20px;
+    margin: 30px 10px 50px -13px;
+    color: white;
+    background-color: #4fbfa8;
+    text-shadow: 0 1px 1px 1px #bbb;
+    display: block;
+    box-shadow: 0 10px 50px 10px #4fbfa8
+    
+}
+.ribbon .new-ribbon
+{
+    position: relative;
+    width: 80px;
+    padding: 6px 20px;
+    margin: 80px 10px 50px -13px;
+    color: white;
+    background-color: #5bc0de;
+    text-shadow: 0 1px 1px 1px #bbb;
+    display: block;
+    box-shadow: 0 10px 50px 10px #5bc0de;
+}
+.scroll-link a
+{
+    font-size: 13px;
+    font-weight: 300;
+    color: gray;
+}
+.price
+{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 30px;
+    font-weight: 300;
+}
+.cart-detail
+{
+    padding-bottom: 20px;
 }
