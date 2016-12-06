@@ -1,1 +1,1 @@
-angular.module('myApp', ['app.routes', 'mainCtrl','app.services','ngAnimate']);
+angular.module('myApp', ['app.routes', 'mainCtrl','app.services']);
