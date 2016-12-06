@@ -310,7 +310,7 @@ body {
 }
 #HeaderTwo{
      border-bottom:1px solid #ccc;
-      line-height:61px;
+      line-height:52px;
     background-color: white;
 }
 #HeaderTwoLeft {
@@ -364,7 +364,6 @@ body {
 #DropDownElement li a {
     text-decoration:none;
     display:inline;
-    width:25%;
     border-bottom: 1px solid #eee;
     font-size:14px;
     line-height:25px;
@@ -376,8 +375,33 @@ body {
 }
  #DropDownHead li:hover #DropDownElement {
     display:inline;
-    margin-top:5%;
+    margin-top:24px;
 }
+
+
+#SearchContainer {
+  background-color: white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  transition:all linear 0.5s;
+}
+#SearchInput {
+  width: 40%;
+  display: inline-block;
+}
+
+/* angular ANimation for the Search button */
+
+#SearchContainer.ng-hide {
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+/* The finishing CSS styles for the enter animation */
+
+
 
    #Footer {
             background-color:#e0e0e0;
