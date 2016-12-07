@@ -1,19 +1,27 @@
-angular.module('mainCtrl', ['app.services']).controller('productController', function ($scope, Product) {
-    Product.get().then(function (res) {
-        $scope.products = res.data;
-        $scope.getImagePath = function (imageName) {
-            return "images/" + imageName;
-        };
-        
-    });
-}).controller('viewController',function($scope,Product,$location){
-   Product.get().then(function (res) {
-        $scope.products = res.data;
-        $scope.getImagePath = function (imageName) {
-            return "images/" + imageName;
-        };
-        $scope.getId=$location.path().split('/').pop();
-        $scope.getId=parseInt($scope.getId);
-        $scope.getId--;
-});
-});
+ var container = {};
+ angular.module('mainCtrl', ['app.services']).controller('productController', function ($scope, Product) {
+     Product.get().then(function (res) {
+         $scope.products = res.data;
+         $scope.getImagePath = function (imageName) {
+             return "images/" + imageName;
+         };
+         $scope.add = function () {
+             if (container !== null) {
+                 container = $scope.products;
+             }
+         };
+         $scope.counter=0;
+         $scope.price=0;
+         $scope.addToCart=function(price){
+         $scope.counter+=1;
+         $scope.price+=parseInt(price);
+            
+         };
+     });
+ }).controller('viewController', function ($scope, $location) {
+     $scope.getId = $location.path().split('/').pop();
+     $scope.getImagePath = function (imageName) {
+         return "images/" + imageName;
+     };
+     $scope.container = container;
+ });

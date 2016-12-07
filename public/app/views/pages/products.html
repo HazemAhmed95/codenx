@@ -45,7 +45,7 @@
                     </ul>
                 </div>
                 <div class="col-md-6" id="HeaderTwoRight">
-                    <button class="btn pull-right"><span class="glyphicon glyphicon-shopping-cart "></span> Cart (0) - $0.00</button>
+                    <button class="btn pull-right"><span class="glyphicon glyphicon-shopping-cart "></span> Cart ({{counter}}) - ${{price}}</button>
                     <button  class="btn pull-right" ng-click="SearchContainer = !SearchContainer" ><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
@@ -193,30 +193,22 @@
                 <div class="col-md-9">
                     <div class="panel">
                         <div class="row">
-                            <div class="col-md-5 text-left">
-                                Showing 10 products of 32 in : $<b>0</b> - <b>$10000</b>
-                            </div>
-                            <div class="col-md-7 text-right">
-                                <b>Sort</b>
-                                <div class="btn-group">
-                                    <a class="btn btn-default btn-primary btn-sm">Low Price</a>
-                                    <a class="btn btn-default btn-primary btn-sm">High Price</a>
-                                    <a class="btn btn-default btn-primary btn-sm">Name (A-Z)</a>
-                                    <a class="btn btn-default btn-primary btn-sm">Name (Z-A)</a>
-                                </div>
-                            </div>
+                        <div class="col-md-5 text-left"> Showing 10 products of 32 in : $<b>0</b> - <b>$10000</b> </div>
+                        <div class="col-md-7 text-right"> <b>Sort</b>
+                            <div class="btn-group"> <a class="btn btn-default btn-primary btn-sm">Low Price</a> <a class="btn btn-default btn-primary btn-sm">High Price</a> <a class="btn btn-default btn-primary btn-sm">Name (A-Z)</a> <a class="btn btn-default btn-primary btn-sm">Name (Z-A)</a> </div>
                         </div>
                     </div>
-                    <div class="row">
-   <div class="col-md-4" ng-controller="productController" ng-repeat="product in products" ng-model="products">
-    <div class="panel">
-        <div class="panel-img"> <img class="check" ng-src="{{getImagePath(product.imageName)}}"> </div>
-        <div class="info text-center">
-            <h3>{{product.name}}</h3>
-            <p>Price:${{product.price}}</p>
-            <br>
-            <div class="btn-group"> <a class="btn btn-default" href="/{{product.id}}">View detail</a> <a class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> </div>
-        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" ng-controller="productController" ng-repeat="product in products" ng-model="products">
+                        <div class="panel">
+                            <div class="panel-img"> <img class="check" ng-src="{{getImagePath(product.imageName)}}"> </div>
+                            <div class="info text-center">
+                                <h3>{{product.name}}</h3>
+                                <p>Price:${{product.price}}</p>
+                                <br>
+                                <div class="btn-group"> <a class="btn btn-default" ng-click="add()" href="/{{product.id}}">View detail</a> <a ng-click="$parent.addToCart(product.price)" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> </div>
+                            </div>
     </div>
 </div>
       
