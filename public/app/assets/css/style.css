@@ -470,11 +470,10 @@ body {
         background-color:#f0f0f0;
     }
     #FormElement {
-        background-color:white;
-        padding:20px;
-        box-shadow: 0px 1px 5px #f0f0f0;
-        margin-bottom:5%;  
-        margin-top:2%;
+        
+        box-shadow: 0px 1px 5px #f0f0f0;  
+        margin-top:2.5%;
+        margin-bottom: 55px;
         border:1px solid #e6e6e6;
         font-family:Arial;
         

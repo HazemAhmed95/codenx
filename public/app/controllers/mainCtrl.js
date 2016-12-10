@@ -24,4 +24,16 @@
          return "images/" + imageName;
      };
      $scope.container = container;
- });
+ }).controller('loginController', ['$scope','$filter',function($scope, $filter){
+
+$scope.characters = 5;
+$scope.username = '';
+$scope.password= '';
+$scope.loginButton = function(){
+
+};
+$scope.signupButton = function (){
+
+};
+
+ }]);
