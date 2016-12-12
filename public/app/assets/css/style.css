@@ -730,4 +730,62 @@ p,h1,h2,h3,h4,h5,h6
 {
 	margin-left: 10px;
 }
-
+blockquote
+{
+	padding: 10px 20px;
+	margin: 0 0 20px;
+	font-size: 14px;
+	border-left: 5px solid #4fbfa8;
+}
+.description a
+{
+	color: #4fbfa8;
+}
+.red
+{
+				background-color:#c21f25;
+        border:6px solid #c21f25;
+        border-radius:15px;
+        width:27px;
+        height:27px;
+        color:white;
+        margin-left:10px;
+        cursor:pointer;
+        text-align:center;
+}
+.blue
+{
+	      background-color: #4460ae;
+        border:6px solid  #4460ae;
+        border-radius:15px;
+        width:27px;
+        height:27px;
+        color:white;
+        margin-left:10px;
+        cursor:pointer;
+        text-align:center;
+}
+.sky
+{
+				background-color: #3cf;
+        border:6px solid  #3cf;
+        border-radius:15px;
+        width:27px;
+        height:27px;
+        color:white;
+        margin-left:10px;
+        cursor:pointer;
+        text-align:center; 
+}
+.green
+{
+				background-color: #4a7f45;
+        border:6px solid  #4a7f45;
+        border-radius:15px;
+        width:27px;
+        height:27px;
+        color:white;
+        margin-left:10px;
+        cursor:pointer;
+        text-align:center; 
+}
