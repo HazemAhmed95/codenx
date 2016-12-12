@@ -14,13 +14,18 @@ angular.module('app.routes', ['ngRoute'])
 				, controllerAs: 'main'
 			})
 		
-			.when('/:id',{
+			.when('/product:id',{
 				templateUrl:'app/views/pages/viewDetail.html',
 				controller:'viewController'
 		})
-		.when('/index/login', {
+		.when('/login', {
                  templateUrl: 'app/views/pages/sign-in.html', 
                 controller:'loginController'
+
+		}) 
+		.when('/register' , {
+			templateUrl: 'app/views/pages/sign-up.html',
+			controller: 'registerController'
 
 		});
     $locationProvider.html5Mode(true);

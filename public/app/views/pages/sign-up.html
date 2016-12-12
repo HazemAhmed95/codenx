@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign in Page</title>
-    <link rel="stylesheet" type="text/css" href="app/assets/css/style.css">
+    <title>Sign up Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">
@@ -10,34 +10,33 @@
 
 <body>
 
-   <div id="HeaderOne">
-        <div class="container">
-            <div class="pull-left" id="HeaderOneLeft">
-                <button class="btn btn-success btn-sm">OFFER OF THE DAY</button>
-                <a>Get flat 35% off on orders over $50!</a>
-            </div>
-            <div class="pull-right" id="HeaderOneRight">
-                <a href="/register">Sign up</a>
-                <span> |</span>
-                <a href="/login"> Login</a>
-                <span> |</span>
-                <a> Contact</a>
-                <span> |</span>
-                <a href="/index">Home</a>
-
+    <div id="HeaderOne">
+            <div class="container">
+                    <div class="col-md-6" id="HeaderOneLeft">
+                        <button class="btn btn-success btn-sm">OFFER OF THE DAY</button>
+                        <a>Get flat 35% off on orders over $50!</a>
+                    </div>
+                    <div class="col-md-6" id="HeaderOneRight">
+                        <a href="/register">Sign up</a>
+                        <span> |</span>
+                        <a href="/login"> Login</a>
+                        <span> |</span>
+                        <a> Contact</a>
+                        <span> |</span>
+                        <a href="/index">Home</a>
+                    </div>
             </div>
         </div>
-    </div>
-
+ 
 
     <div id="HeaderTwo">
         <div class="container">
             <div class="col-md-12">
-                <div class="pull-left" id="HeaderTwoLeft">
-                    <a href="/index"><img src="app/logo.gif" /></a>
+                <div class="col-md-6" id="HeaderTwoLeft">
+                   <a href="/index"><img src="app/logo.gif" /></a>
                     <ul id="DropDownHead">
                         <li>MEN <span class="caret"></span>
-                            <ul class="container" id="DropDownElement">
+                            <ul id="DropDownElement">
                                 <li><a>Casual Shirts</a></li>
                                 <li><a>Casual Trousers</a></li>
                                 <li><a>Winter Wear</a></li>
@@ -47,7 +46,7 @@
                             </ul>
                         </li>
                         <li>WOMEN <span class="caret"></span>
-                            <ul class="container" id="DropDownElement">
+                            <ul id="DropDownElement">
                                 <li><a>Trousers</a></li>
                                 <li><a>Jeans</a></li>
                                 <li><a>Skirts</a></li>
@@ -55,50 +54,38 @@
                             </ul>
                         </li>
                     </ul>
-                </div>     
-                <div class="pull-right" id="HeaderTwoRight">
-                    <button class="btn pull-right"><span class="glyphicon glyphicon-shopping-cart "></span> Cart ({{counter}}) - ${{price}}</button>
-                    <button  class="btn pull-right" ng-click="SearchContainer = !SearchContainer" ><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+                <div class="col-md-6" id="HeaderTwoRight">
+                    <a href="cart.html" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Cart (0) - $0.00</a>
+                    <a class="btn btn-primary" id="Search"><span class="glyphicon glyphicon-search"></span></a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Search template -->
-    <div class="col-md-12">
-    <div class="col-md-6 col-md-offset-3" >    
-    <div id="SearchContainer" class="text-center" ng-show="SearchContainer" >
-    <input type="text" name="search" class="form-control" id="SearchInput" placeholder="search products">
-    <button class="btn" ><span class="glyphicon glyphicon-search"></span></button> 
-    </div>
-    </div>
-    </div>
-    <!-- End of Search template-->
     <!--End of the Headers-->
-
-    <!-- Form Starts-->
-
-    <div id="FormContainer" ng-controller="loginController"> 
+    <div id="FormContainer" ng-controller="registerController">
         <div class="container">
             <div class="col-md-12">
-                <div  class="jumbotron col-md-6 col-md-offset-3" id="FormElement">
-                    <h1>Login</h1>
-                    <h3>Already our customer?</h3>
-                    <p>Default account is <code>user@codenx.com</code> / <code>codenx</code> <br />
-                       Admin account is <code>admin@codenx.com</code> /<code>codenx</code>
-                    </p>
+                <div id="FormElement" class="jumbotron col-md-6 col-md-offset-3">
+                    <h1>New Account</h1>
+                    <h4>Not our Registered Customer yet?</h4>
+                    <h3>With registration with us new world of fashion, fantastic discounts and much more opens to you! the whole process will not take you more than a minute!</h3>
+                    <p>If you have any questions, please feel free to contact us, our customer service center is working for you 24/7.</p>
 
                     <div id="inputContainer">
                         <label>Username</label>
-                        <input name="name" class="form-control" placeholder=" Your Username" ng-model="username" />
-                        
+                        <input name="name" class="form-control" placeholder=" Your Name" ng-model="username" />
+                        <br />
+                        <label>Email</label>
+                        <input name="name" type="email" class="form-control" placeholder=" Email ID" ng-model="email" />
                         <br />
                         <label>Password</label>
-                        <input name="name" type="password" class="form-control" placeholder=" Password" ng-model="password"/>
+                        <input name="name" type="password" class="form-control" placeholder=" Password " ng-model="password" />
                         <br />
 
                         
                             <div id="ButtonContainer">
-                                <button class="btn" id="Signup" ng-click="signupButton()"><span class="glyphicon glyphicon-user"  ></span> Sign up</button>
+                                <button class="btn" id="Signup" ng-click="signupButton()"><span class="glyphicon glyphicon-user"></span> Sign up</button>
                                 <button class="btn" id="Login" ng-click="loginButton()">Login</button>
                             </div> 
                     </div>
@@ -162,8 +149,10 @@
                 <h4>Get the news</h4>
                 <h5>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas</h5>
                 <form class="form-inline">
+
                     <input type="text" class="form-control" id="InputForm" />
                     <button class="btn btn-default" id="ButtonForm">Subscribe</button>
+
 
 
                 </form>
@@ -174,7 +163,6 @@
                     <a><i class="stay-touch fa fa-twitter" aria-hidden="true"></i></a>
                     <a><i class="stay-touch fa fa-envelope" aria-hidden="true"></i></a>
                     <a><i class="stay-touch fa fa-google-plus" aria-hidden="true"></i></a>
-
 
                 </p>
             </div>

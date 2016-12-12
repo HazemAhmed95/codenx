@@ -504,9 +504,11 @@ body {
      border-top : 1px solid #999;
      padding-top: 4%;
      line-height:30px;
-     width:95%;
-     margin-left: 2%;
  }
+ p code {
+     padding: 0;
+ }
+
     #ButtonContainer {
        text-align:center;
     }

@@ -24,7 +24,7 @@
          return "images/" + imageName;
      };
      $scope.container = container;
- }).controller('loginController', ['$scope','$filter',function($scope, $filter){
+ }).controller('loginController', ['$scope','$filter','$location',function($scope, $filter,$location){
 
 $scope.characters = 5;
 $scope.username = '';
@@ -32,6 +32,20 @@ $scope.password= '';
 $scope.loginButton = function(){
 
 };
+$scope.signupButton = function (){
+$location.path("/register");
+};
+
+ }]).controller('registerController', ['$scope', '$filter','$location',function($scope, $filter,$location){
+
+$scope.username = '';
+$scope.password= '';
+$scope.email = '';
+
+$scope.loginButton = function(){
+$location.path("/login");
+};
+
 $scope.signupButton = function (){
 
 };
