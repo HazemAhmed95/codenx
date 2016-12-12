@@ -9,7 +9,8 @@ var connection = database.connectDatabase();
 
 
 router.route('/products')
-.get(verifyUser,function(req, res) {
+
+.get(function(req, res) {
    var query = "SELECT * FROM Products";
    connection.query(query, function(err, rows, fields) {
       if(err) {
