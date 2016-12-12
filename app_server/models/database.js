@@ -4,10 +4,10 @@ module.exports = {
    connectDatabase: function() {
       
       var connection = mysql.createConnection({
-         host: 'sql6.freemysqlhosting.net', 
-         user: 'sql6148662',
-         password: '8BD2epJKdm',
-         database: 'sql6148662'
+         host: 'sql9.freemysqlhosting.net', 
+         user: 'sql9148822',
+         password: '3gWYXnZf3V',
+         database: 'sql9148822'
       });
 
       connection.connect(function(err) {
