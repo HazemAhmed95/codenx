@@ -81,7 +81,7 @@ function verifyUser(req, res, next) {
   if (token) {
 		 jwt.verify(token,Secret,function(err,decoded){
 			  if (err)
-					 return res.json({ success: false, message: 'Failed to authenticate token.' });
+					 return res.json({ success: false, message: 'You Are not Logged In.' });
 			  else {
 					 req.decoded = decoded; 
 					 console.log(req.decoded);
@@ -92,7 +92,7 @@ function verifyUser(req, res, next) {
 	 else {
 		  return res.status(403).send({ 
         success: false, 
-        message: 'No token provided.' 
+        message: 'No token Provided.' 
 		  });
 	 }
 
