@@ -9,6 +9,9 @@ var morgan     = require('morgan'); 		// used to see requests
 var config 	   = require('./config');
 var path 	     = require('path');
 
+var session  = require('express-session');
+var flash    = require('connect-flash');
+var passport        = require('./app_server/models/passport')(passport);
 // APP CONFIGURATION ==================
 // ====================================
 // use body parser so we can grab information from POST requests
@@ -34,10 +37,19 @@ app.use(express.static(__dirname + '/public'));
 
 // ROUTES FOR OUR API =================
 // ====================================
+// required for passport
+app.use(session({
+	secret: 'vidyapathaisalwaysrunning',
+	resave: true,
+	saveUninitialized: true
+ } )); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
 // API ROUTES ------------------------
 var apiRoutes = require('./app_server/routes/api');
-app.use('/api', apiRoutes);
+app.use('/api', apiRoutes)(passport);
 
 // MAIN CATCHALL ROUTE --------------- 
 // SEND USERS TO FRONTEND ------------
