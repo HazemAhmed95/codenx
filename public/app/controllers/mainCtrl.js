@@ -1,4 +1,5 @@
  var container = {};
+var cart={};
  angular.module('mainCtrl', ['app.services'])
 	 
 	 .controller('productController', function ($scope, Product) {
@@ -7,26 +8,26 @@
 				$scope.getImagePath = function (imageName) {
 					return "images/" + imageName;
 				};
-				$scope.add = function () {
+			
 					if (container !== null) {
 						container = $scope.products;
 					}
-				};
-				$scope.counter = 0;
-				$scope.price = 0;
-				$scope.addToCart = function (price) {
-					$scope.counter += 1;
-					$scope.price += parseInt(price);
+				
+				
+				$scope.addToCart = function (id) {
+					cart= container[id];
+                    console.log(cart);
 				};
 			});
  })
 	 
  .controller('viewController', function ($scope, $location) {
-			  $scope.getId = $location.path().split('/').pop();
+			  $scope.getId = $location.path().split(':').pop();   
 			  $scope.getImagePath = function (imageName) {
 					return "images/" + imageName;
 			  };
 			  $scope.container = container;
+            
  })
 	 
 	 
