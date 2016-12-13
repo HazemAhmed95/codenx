@@ -2,11 +2,11 @@ var express    = require('express'),
     router     = express.Router(),  
     mysql      = require('mysql'),
     database   = require('../models/database'),
-    bcrypt 		= require('bcryptjs'),
+    bcrypt 		 = require('bcryptjs'),
     Secret     = "LeahYaZmanMsbtnashAbrya2",
-    jwt 			= require('jsonwebtoken');
-var connection = database.connectDatabase();
+    jwt 			 = require('jsonwebtoken');
 
+var connection = database.connectDatabase();
 
 router.route('/products')
 
@@ -20,6 +20,56 @@ router.route('/products')
       }
    });
 });
+
+
+router.route('/cart')
+
+// when user press add to cart
+.post(function(req, res) {
+  // decrementing quantity of product being added to Cart table
+  var editQuantityQuery = 'UPDATE Products SET quantity = quantity - 1 WHERE id = ? and quantity > 1';
+  connection.query(editQuantityQuery, [req.body.id], function(err, rows) {
+    if(err) {
+      throw err;
+    } else {
+      // adding product data to Cart table
+      var insertToCartQuery = 'INSERT INTO Cart (name, price, quantity, UserId) values(?, ?, ?, ?);'
+      connection.query(insertToCartQuery, [req.body.name, req.body.price, req.body.quantity, 'hazem'], function(err, rows) {
+        if(err) {
+          throw err;
+        } else {
+          res.json({message: 'Successfully added to cart'});
+        }
+      });
+    }
+  });
+})
+
+// when user press cart
+.get(function(req, res) {
+  // get the data from cart table using the signedInUserId and send it to frontend
+  var selectCartsQuery = "SELECT name, price, quantity, cartId FROM Cart WHERE UserId = ?";
+  connection.query(selectCartsQuery, ['hazem'], function(err, rows) {
+    if(err) {
+      throw err;
+    } else {
+      res.json(rows);
+    }
+  });
+})
+
+// when the user press the x/clear beside the product in the cart
+.delete(function(req, res) {
+  var deleteCartQuery = "DELETE FROM Cart WHERE cartId = ?";
+  connection.query(deleteCartQuery, [req.body.id], function(err, result) {
+    if(err) {
+      throw err;
+    } else {
+      res.json({message: 'Successfully deleted from cart'});
+    }
+  });
+});
+
 
 //////////////////
 // USER SIGN UP///
@@ -83,7 +133,7 @@ function verifyUser(req, res, next) {
   if (token) {
 		 jwt.verify(token,Secret,function(err,decoded){
 			  if (err)
-					 return res.json({ success: false, message: 'You Are not Logged In.' });
+					 return res.json({ success: false, message: 'Failed to authenticate token.' });
 			  else {
 					 req.decoded = decoded; 
 					 console.log(req.decoded);
@@ -94,7 +144,7 @@ function verifyUser(req, res, next) {
 	 else {
 		  return res.status(403).send({ 
         success: false, 
-        message: 'No token Provided.' 
+        message: 'No token provided.' 
 		  });
 	 }
 
