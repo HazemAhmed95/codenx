@@ -11,7 +11,7 @@ angular.module('app.routes', ['ngRoute'])
 			.when('/index', {
 				templateUrl: 'app/views/pages/products.html',
 				controller: 'productController'
-				, controllerAs: 'main'
+				
 			})
 		
 			.when('/product:id',{
