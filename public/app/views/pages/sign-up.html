@@ -7,24 +7,30 @@
                     <h4>Not our Registered Customer yet?</h4>
                     <h3>With registration with us new world of fashion, fantastic discounts and much more opens to you! the whole process will not take you more than a minute!</h3>
                     <p>If you have any questions, please feel free to contact us, our customer service center is working for you 24/7.</p>
-
+						<div ng-show="res" ng-class="res.success == true?'alert alert-success alert-dismissible fade in':'alert alert-danger alert-dismissible fade in'" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  						  <span aria-hidden="true">&times;</span>
+  					 </button>
+						  <strong>{{res.message}}</strong> 
+						</div>
+				<form name="form">
                     <div id="inputContainer">
                         <label>Username</label>
-                        <input name="name" class="form-control" placeholder=" Your Name" ng-model="username" />
+                        <input name="name" class="form-control" placeholder=" Your Name" ng-model="username"  required/>
                         <br />
                         <label>Email</label>
-                        <input name="name" type="email" class="form-control" placeholder=" Email ID" ng-model="email" />
+                        <input name="name" type="email" class="form-control" placeholder=" Email ID" ng-model="email" required/>
                         <br />
                         <label>Password</label>
-                        <input name="name" type="password" class="form-control" placeholder=" Password " ng-model="password" />
+                        <input name="name" type="password" class="form-control" placeholder=" Password " ng-model="password" required/>
                         <br />
-
-                        
-                            <div id="ButtonContainer">
-                                <button class="btn" id="Signup" ng-click="signupButton()"><span class="glyphicon glyphicon-user"></span> Sign up</button>
+                    
+                           <div id="ButtonContainer">
+                                <button  type="submit" class="btn" id="Signup" ng-click="signupButton()"><span class="glyphicon glyphicon-user"></span> Sign up</button>
                                 <button class="btn" id="Login" ng-click="loginButton()">Login</button>
                             </div> 
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

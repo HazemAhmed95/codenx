@@ -25,19 +25,21 @@ router.route('/products')
 // USER SIGN UP///
 //////////////////
 router.post("/signup", function (req, res) {
-			connection.query("SELECT * FROM Users WHERE username = ?", [req.body.username], function (err, rows) {
+	    console.log(req.body);
+			connection.query("SELECT * FROM Users WHERE userName = ?", [req.body.username], function (err, rows) {
 					if (err) return done(err);
 					if (rows.length)
-						 res.json({message: 'User Name Already Exists'});
+						 res.json({success: false, message: 'User Name Already Exists'});
 					else {
 						var newUserMysql = {
 							username: req.body.username,
-							password: bcrypt.hashSync(req.body.password, 8)
+							password: bcrypt.hashSync(req.body.password, 8),
+							email : req.body.email
 						};
-						var insertQuery = "INSERT INTO Users ( username, password ) values (?,?)";
-						connection.query(insertQuery, [newUserMysql.username, newUserMysql.password], function (err,rows) {
+						var insertQuery = "INSERT INTO Users ( userName, password,email ) values (?,?,?)";
+						connection.query(insertQuery, [newUserMysql.username, newUserMysql.password,newUserMysql.email], function (err,rows) {
 							if (err) throw err;
-								 res.json({message: 'Registration Successful'});
+								 res.json({  success: true,message: 'Registration Successful You Can Log In now !'});
 						})
 					}
 				});

@@ -31,7 +31,7 @@ var cart={};
  })
 	 
 	 
- .controller('loginController', ['$scope','$filter','$location',function($scope, $filter,$location){
+ .controller('loginController', ['$scope','$filter','$location','users',function($scope, $filter,$location,users){
 
 		$scope.characters = 5;
 		$scope.username = '';
@@ -44,14 +44,25 @@ var cart={};
  }])
  
  
-.controller('registerController', ['$scope', '$filter','$location',function($scope, $filter,$location){
+.controller('registerController', ['$scope', '$filter','$location','users',function($scope, $filter,$location,users){
 
-$scope.username = '';
-$scope.password = '';
-$scope.email = '';
+$scope.username ="";
+
+
+	
 $scope.loginButton = function () {
 	$location.path("/login");
 };
-$scope.signupButton = function () {};
+	
+$scope.signupButton = function () {
+
+
+	users.signUp($scope.username, $scope.password, $scope.email)
+		.success(function (response) {
+			$scope.res = response;
+		});
+	
+};
+	
 
  }]);
