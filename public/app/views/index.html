@@ -60,7 +60,7 @@
                     </ul>
                 </div>
                 <div class="pull-right" id="HeaderTwoRight" ng-controller="checkCart">
-                    <button class="btn pull-right" ng-click="showModal=!showModal;"><span class="glyphicon glyphicon-shopping-cart "></span> Cart</button>
+                    <button class="btn pull-right" ng-click="showModal=!showModal; loadProductsInCart()"><span class="glyphicon glyphicon-shopping-cart "></span> Cart</button>
                     <button class="btn pull-right" ng-click="SearchContainer = !SearchContainer"><span class="glyphicon glyphicon-search"></span></button>
                     <!-- Modal template -->
                     <div id="showModal" ng-show="showModal" tabindex="-1" role="dialog">
@@ -75,7 +75,7 @@
                                         <li>{{cart.price}}</li>
                                         <li>{{cart.quantity}}</li>
                                         <li><a class="btn btn-default" ng-click="remove(cart.cartId)">Remove</a></li>                      
-                                </ul>
+                                    </ul>
                                     <hr>
                                 </div>
                                 <div class="modal-footer">

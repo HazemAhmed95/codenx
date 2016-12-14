@@ -47,12 +47,15 @@
          });
      };
  }]).controller('checkCart', ['$scope', '$http', function ($scope, $http) {
-     $http.get('http://localhost:8080/api/cart').success(function (response) {
-         $scope.carts = response;
-         $scope.getImagePath = function (imageName) {
-             return "images/" + imageName;
+ 	$scope.loadProductsInCart = function() {
+ 		 $http.get('http://localhost:8080/api/cart').success(function (response) {
+           $scope.carts = response;
+           $scope.getImagePath = function (imageName) {
+           return "images/" + imageName;
          };
      });
+ 	}
+
      $scope.remove = function (id) {
 	     $http({
 	   		 method: 'DELETE',
@@ -60,6 +63,7 @@
 	    	 data: {id : id},
 	    	 headers: {'Content-Type': 'application/json;charset=utf-8'}
 		 }).then(function successCallback(response) {
+		 	 $scope.loadProductsInCart();
 		     alert(response.data.message);
   		 });
      };
