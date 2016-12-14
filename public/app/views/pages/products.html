@@ -137,14 +137,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4" ng-controller="productController" ng-repeat="product in products" ng-model="products">
+                    <div class="col-md-4" ng-controller="productController" ng-repeat="product in products" >
                         <div class="panel">
                             <div class="panel-img"> <img class="check" ng-src="{{getImagePath(product.imageName)}}"> </div>
                             <div class="info text-center">
                                 <h3>{{product.name}}</h3>
                                 <p>Price:${{product.price}}</p>
+                                <p>Quantity:{{product.quantity}}</p>
                                 <br>
-                                <div class="btn-group"> <a class="btn btn-default" href="/product:{{product.id}}">View detail</a> <a ng-click="$parent.addToCart(product.id)" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> </div>
+                                <div class="btn-group"> <a class="btn btn-default" href="/product:{{product.id}}">View detail</a> <a ng-model="product.quantity" ng-click="$parent.addToCart(product.id)" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> </div>
                             </div>
   			  </div>
 </div>

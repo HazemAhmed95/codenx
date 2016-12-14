@@ -11,7 +11,6 @@ angular.module('app.services', [])
 })
 
 
-
 .factory('users',function($http){
 	var usersFactory = {}
 	usersFactory.signUp = function (username,password ,email) {

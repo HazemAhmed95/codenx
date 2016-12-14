@@ -59,7 +59,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="pull-right" id="HeaderTwoRight">
+                <div class="pull-right" id="HeaderTwoRight" ng-controller="checkCart">
                     <button class="btn pull-right" ng-click="showModal=!showModal;"><span class="glyphicon glyphicon-shopping-cart "></span> Cart</button>
                     <button class="btn pull-right" ng-click="SearchContainer = !SearchContainer"><span class="glyphicon glyphicon-search"></span></button>
                     <!-- Modal template -->
@@ -68,11 +68,15 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">Check Out</h4> </div>
-                                <div class="modal-body">
-                                    <ul>
-                                        <li>item1</li>
-                                        <li>item2</li>
-                                    </ul>
+                                <div class="modal-body order" ng-repeat="cart in carts">
+                                  <img class="cartimg" ng-src="{{getImagePath(cart.imageName)}}">
+                                    <ul class="list-unstyled cartul">
+                                        <li >{{cart.name}}</li>      
+                                        <li>{{cart.price}}</li>
+                                        <li>{{cart.quantity}}</li>
+                                        <li><a class="btn btn-default" ng-click="remove(cart.cartId)">Remove</a></li>                      
+                                </ul>
+                                    <hr>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" ng-click="showModal=!showModal">Close</button>

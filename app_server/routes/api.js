@@ -49,7 +49,7 @@ router.route('/cart')
 // when user press cart
 .get(function(req, res) {
   // get the data from cart table using the signedInUserId and send it to frontend
-  var selectCartsQuery = "SELECT name, price, quantity, imagenAME, cartId FROM Cart WHERE UserId = ?";
+  var selectCartsQuery = "SELECT name, price, quantity, imageName, cartId FROM Cart WHERE UserId = ?";
   connection.query(selectCartsQuery, ['hazem'], function(err, rows) {
     if(err) {
       throw err;
