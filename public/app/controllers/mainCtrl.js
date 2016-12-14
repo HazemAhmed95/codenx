@@ -1,12 +1,12 @@
  var container = {};
  angular.module('mainCtrl', ['app.services'])
  
-<<<<<<< HEAD
- .controller('productController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
-=======
+
+ 
+
 	 
 	 .controller('productController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
->>>>>>> refs/remotes/origin/master
+
      Product.get().then(function (res) {
          $scope.products = res.data;
          $scope.getImagePath = function (imageName) {
@@ -36,31 +36,38 @@
          return "images/" + imageName;
      };
      $scope.container = container;
-<<<<<<< HEAD
+
  }])
     
-.controller('loginController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
-     $scope.characters = 5;
-     $scope.username = '';
-     $scope.password = '';
-     $scope.loginButton = function () {};
-     $scope.signupButton = function () {
-         $location.path("/register");
-     };
- }])
-
-.controller('registerController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
-     $scope.username = "";
-     $scope.loginButton = function () {
-         $location.path("/login");
-     };
-     $scope.signupButton = function () {
-         users.signUp($scope.username, $scope.password, $scope.email).success(function (response) {
-             $scope.res = response;
-         });
-     };
- }])
+.controller('loginController', ['$scope', '$filter', '$location', 'users','Auth',function ($scope, $filter, $location, users,Auth) {
      
+ 	 $scope.loginButton = function () {
+ 		 Auth.login($scope.username, $scope.password)
+ 		  		.success(function (response) {
+ 			 			$scope.res = response;
+ 		  			console.log($scope.res);
+ 					});
+ 	  };
+     
+ 	 $scope.signupButton = function () {
+           $location.path("/register");
+       };
+}])
+.controller('registerController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
+ 
+ 	 $scope.username = "";
+ 
+ 		 $scope.loginButton = function () {
+ 					$location.path("/login");
+ 			  };
+ 	
+ 		 $scope.signupButton = function () {
+ 					users.signUp($scope.username, $scope.password, $scope.email)
+ 						.success(function (response) {
+ 								$scope.res = response;
+ 					});
+ 			  };
+ }])
 .controller('checkCart', ['$scope', 'Carts', '$http', function ($scope, Carts, $http) {
     $scope.loadProductsInCart = function () {
         Carts.get().then(function (res) {
@@ -106,9 +113,9 @@
            }
            
        });
- });
-=======
- }]).controller('loginController', ['$scope', '$filter', '$location', 'users','Auth',function ($scope, $filter, $location, users,Auth) {
+ })
+     
+     .controller('loginController', ['$scope', '$filter', '$location', 'users','Auth',function ($scope, $filter, $location, users,Auth) {
     
 	 $scope.loginButton = function () {
 		 Auth.login($scope.username, $scope.password)
@@ -163,4 +170,4 @@
   		 });
      };
  }]);    
->>>>>>> refs/remotes/origin/master
+

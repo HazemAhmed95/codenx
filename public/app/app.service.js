@@ -30,15 +30,14 @@ angular.module('app.services', [])
 
 })
 
-<<<<<<< HEAD
+
 .factory('Carts', function ($http) {
     return {
         get: function () {
             return $http.get('http://localhost:8080/api/cart');
         }
     };
-});
-=======
+})
 .factory('Auth', function($http, $q, AuthToken) {
 	
 	var authFactory = {};
@@ -115,5 +114,4 @@ angular.module('app.services', [])
 	
  return interceptorFactory;
 
- });			
->>>>>>> refs/remotes/origin/master
+ });		
