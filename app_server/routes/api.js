@@ -107,6 +107,7 @@ router.post('/login', function (req, res) {
 			// check if password matches
 			if (!bcrypt.compareSync(req.body.password, rows[0].password)) {
 				res.json({
+					success: false,
 					message: 'Incorrect Password'
 				});
 			}

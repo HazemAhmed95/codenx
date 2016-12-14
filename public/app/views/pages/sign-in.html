@@ -8,25 +8,32 @@
                 <div  class="jumbotron col-md-6 col-md-offset-3" id="FormElement">
                     <h1>Login</h1>
                     <h3>Already our customer?</h3>
-                    <p>Default account is <code>user@codenx.com</code> / <code>codenx</code> <br />
-                       Admin account is <code>admin@codenx.com</code> /<code>codenx</code>
+                    <p>Default account is <code>Hazem</code> / <code>111</code> <br />
+                       Admin account is <code>admin</code> /<code>admin</code>
                     </p>
-
+                    	<div ng-show="res" ng-class="res.success == true?'alert alert-success alert-dismissible fade in':'alert alert-danger alert-dismissible fade in'" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  						  <span aria-hidden="true">&times;</span>
+  					 </button>
+						  <strong>{{res.message}}</strong> 
+						</div>
+			<form name="form">
                     <div id="inputContainer">
                         <label>Username</label>
-                        <input name="name" class="form-control" placeholder=" Your Username" ng-model="username" />
+                        <input name="name" class="form-control" placeholder=" Your Username" ng-model="username" required/>
                         
                         <br />
                         <label>Password</label>
-                        <input name="name" type="password" class="form-control" placeholder=" Password" ng-model="password"/>
+                        <input name="name" type="password" class="form-control" placeholder=" Password" ng-model="password" required/>
                         <br />
 
                         
                             <div id="ButtonContainer">
-                                <button class="btn" id="Signup" ng-click="signupButton()"><span class="glyphicon glyphicon-user"  ></span> Sign up</button>
-                                <button class="btn" id="Login" ng-click="loginButton()">Login</button>
+                                <button class="btn" type="submit" id="Signup" ng-click="loginButton()"><span class="glyphicon glyphicon-user"  ></span>Login </button>
+                                <button class="btn" id="Login" ng-click="">Sign up</button>
                             </div> 
                     </div>
+						 </form>
                 </div>
             </div>
         </div>

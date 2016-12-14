@@ -29,3 +29,81 @@ angular.module('app.services', [])
 	return usersFactory;
 
 })
+
+.factory('Auth', function($http, $q, AuthToken) {
+	
+	var authFactory = {};
+	
+	authFactory.login = function(username, password) {
+		return $http.post('http://localhost:8080/api/login', {
+			 username : username,
+			 password : password
+		})
+		.success(function(response){
+			AuthToken.setToken(response.token);
+			return response;
+		})
+	}
+	
+	authFactory.logout = function() { 
+  			AuthToken.setToken();
+  }
+	return authFactory;
+})
+			
+// factory for handling tokens
+// inject $window to store token client-side
+.factory('AuthToken', function($window) {
+
+	 var authTokenFactory = {};
+
+	 // get the token
+  authTokenFactory.getToken = function() {
+	  return $window.localStorage.getItem('token');
+  }
+	 // set the token or clear the token
+  authTokenFactory.setToken = function(token){
+	  if(token){
+		  $window.localStorage.setItem('token', token);
+		  console.log("saved");
+	  }
+		  else 
+		  $window.localStorage.removeItem('token');
+  }
+  
+ 
+	return authTokenFactory;
+
+ })
+			
+// application configuration to integrate token into requests
+.factory('AuthInterceptor', function($q, AuthToken){
+
+ var interceptorFactory = {};
+
+// this will happen on all HTTP requests
+ interceptorFactory.request = function(config) {
+	 //get the tokken from the localstorage
+	var token = AuthToken.getToken();
+	 // if the token exists, add it to the header as x-access-token
+ 	if (token)
+	 config.headers['x-access-token'] = token;
+	 
+	 return config;
+	 
+ }
+ 
+ interceptorFactory.responseError = function(response) {
+
+	 // if our server returns a 403 forbidden response
+	 if (response.status == 403)
+	 	$location.path('/login');
+
+	 // return the errors from the server as a promise
+	 return $q.reject(response);
+ 
+ };
+	
+ return interceptorFactory;
+
+ });			
