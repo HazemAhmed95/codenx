@@ -1,5 +1,6 @@
  var container = {};
  angular.module('mainCtrl', ['app.services'])
+ 
  .controller('productController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
      Product.get().then(function (res) {
          $scope.products = res.data;
@@ -9,12 +10,12 @@
          if (container !== null) {
              container = $scope.products;
          }
+        
          $scope.addToCart = function (id) {
              if (container[id].quantity > 0) {
                  $scope.products[id].quantity--;
-                 container[id].quantity--;
                  $http.post('http://localhost:8080/api/cart', container[id]).success(function (res) {
-                     alert(res.message);
+                     console.log(res.message);
                  });
              }
              else {
@@ -22,13 +23,17 @@
              }
          };
      });
- }]).controller('viewController', ['$scope', '$location',  function ($scope, $location) {
+ }])
+     
+.controller('viewController', ['$scope', '$location',  function ($scope, $location) {
      $scope.getId = $location.path().split(':').pop();
      $scope.getImagePath = function (imageName) {
          return "images/" + imageName;
      };
      $scope.container = container;
- }]).controller('loginController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
+ }])
+    
+.controller('loginController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
      $scope.characters = 5;
      $scope.username = '';
      $scope.password = '';
@@ -36,7 +41,9 @@
      $scope.signupButton = function () {
          $location.path("/register");
      };
- }]).controller('registerController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
+ }])
+
+.controller('registerController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
      $scope.username = "";
      $scope.loginButton = function () {
          $location.path("/login");
@@ -46,25 +53,51 @@
              $scope.res = response;
          });
      };
- }]).controller('checkCart', ['$scope', '$http', function ($scope, $http) {
- 	$scope.loadProductsInCart = function() {
- 		 $http.get('http://localhost:8080/api/cart').success(function (response) {
-           $scope.carts = response;
-           $scope.getImagePath = function (imageName) {
-           return "images/" + imageName;
-         };
-     });
- 	}
-
-     $scope.remove = function (id) {
-	     $http({
-	   		 method: 'DELETE',
-	   		 url: 'http://localhost:8080/api/cart',
-	    	 data: {id : id},
-	    	 headers: {'Content-Type': 'application/json;charset=utf-8'}
-		 }).then(function successCallback(response) {
-		 	 $scope.loadProductsInCart();
-		     alert(response.data.message);
-  		 });
-     };
- }]);    
+ }])
+     
+.controller('checkCart', ['$scope', 'Carts', '$http', function ($scope, Carts, $http) {
+    $scope.loadProductsInCart = function () {
+        Carts.get().then(function (res) {
+            $scope.carts = res.data;
+            $scope.getImagePath = function (imageName) {
+                return "images/" + imageName;
+            };
+              $scope.counter=0;
+           $scope.totalPrice=0;
+           for(var i=0;i<$scope.carts.length;i++){
+               $scope.totalPrice+=parseInt($scope.carts[i].price);
+                console.log($scope.carts[i].price);
+               $scope.counter=i+1;
+           }
+            $scope.remove = function (id) {
+                $http({
+                    method: 'DELETE'
+                    , url: 'http://localhost:8080/api/cart'
+                    , data: {
+                        id: id
+                    }
+                    , headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    }
+                }).then(function successCallback(response) {
+                    $scope.loadProductsInCart();
+                    console.log(response.data.message);
+                });
+            };
+        });
+    };
+ }])
+ 
+ .controller('checkoutController',function($scope,Carts){
+       Carts.get().then(function (res) {
+            $scope.carts = res.data;
+           $scope.counter=0;
+           $scope.totalPrice=0;
+           for(var i=0;i<$scope.carts.length;i++){
+               $scope.totalPrice+=parseInt($scope.carts[i].price);
+                console.log($scope.carts[i].price);
+               $scope.counter=i+1;
+           }
+           
+       });
+ });

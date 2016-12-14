@@ -27,6 +27,10 @@ angular.module('app.routes', ['ngRoute'])
 			templateUrl: 'app/views/pages/sign-up.html',
 			controller: 'registerController'
 
-		});
+		})
+        .when('/checkout',{
+           templateUrl: 'app/views/pages/checkout.html',
+			controller: 'checkoutController' 
+        });
     $locationProvider.html5Mode(true);
 });
