@@ -53,11 +53,13 @@
          };
      });
      $scope.remove = function (id) {
-         console.log(id);
-         $http.delete('http://localhost:8080/api/cart', {
-             id: id
-         }).success(function (res) {
-             console.log(res.message);
-         });
+	     $http({
+	   		 method: 'DELETE',
+	   		 url: 'http://localhost:8080/api/cart',
+	    	 data: {id : id},
+	    	 headers: {'Content-Type': 'application/json;charset=utf-8'}
+		 }).then(function successCallback(response) {
+		     alert(response.data.message);
+  		 });
      };
  });    

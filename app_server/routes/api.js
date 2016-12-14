@@ -66,6 +66,7 @@ router.route('/cart')
     if(err) {
       throw err;
     } else {
+      console.log(req.body.id);
       res.json({message: 'Successfully deleted from cart'});
     }
   });
