@@ -36,8 +36,7 @@ router.route('/cart')
       var insertToCartQuery = 'INSERT INTO Cart (name, price, quantity, imageName, UserId) values(?, ?, ?, ?, ?);'
       connection.query(insertToCartQuery, [req.body.name, req.body.price, req.body.quantity, req.body.imageName, 'hazem'], function(err, rows) {
         if(err) {
-          //throw err;
-          console.log(err);
+          throw err;
         } else {
           res.json({message: 'Successfully added to cart'});
         }
@@ -66,7 +65,6 @@ router.route('/cart')
     if(err) {
       throw err;
     } else {
-      console.log(req.body.id);
       res.json({message: 'Successfully deleted from cart'});
     }
   });

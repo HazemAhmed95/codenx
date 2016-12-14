@@ -1,5 +1,6 @@
  var container = {};
- angular.module('mainCtrl', ['app.services']).controller('productController', function ($scope, Product, $http) {
+ angular.module('mainCtrl', ['app.services'])
+ .controller('productController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
      Product.get().then(function (res) {
          $scope.products = res.data;
          $scope.getImagePath = function (imageName) {
@@ -21,13 +22,13 @@
              }
          };
      });
- }).controller('viewController', function ($scope, $location) {
+ }]).controller('viewController', ['$scope', '$location',  function ($scope, $location) {
      $scope.getId = $location.path().split(':').pop();
      $scope.getImagePath = function (imageName) {
          return "images/" + imageName;
      };
      $scope.container = container;
- }).controller('loginController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
+ }]).controller('loginController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
      $scope.characters = 5;
      $scope.username = '';
      $scope.password = '';
@@ -45,9 +46,9 @@
              $scope.res = response;
          });
      };
- }]).controller('checkCart', function ($scope, $http) {
-     $http.get('http://localhost:8080/api/cart').success(function (res) {
-         $scope.carts = res;
+ }]).controller('checkCart', ['$scope', '$http', function ($scope, $http) {
+     $http.get('http://localhost:8080/api/cart').success(function (response) {
+         $scope.carts = response;
          $scope.getImagePath = function (imageName) {
              return "images/" + imageName;
          };
@@ -62,4 +63,4 @@
 		     alert(response.data.message);
   		 });
      };
- });    
+ }]);    
