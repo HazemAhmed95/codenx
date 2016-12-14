@@ -1,7 +1,12 @@
  var container = {};
  angular.module('mainCtrl', ['app.services'])
  
+<<<<<<< HEAD
  .controller('productController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
+=======
+	 
+	 .controller('productController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
+>>>>>>> refs/remotes/origin/master
      Product.get().then(function (res) {
          $scope.products = res.data;
          $scope.getImagePath = function (imageName) {
@@ -31,6 +36,7 @@
          return "images/" + imageName;
      };
      $scope.container = container;
+<<<<<<< HEAD
  }])
     
 .controller('loginController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
@@ -101,3 +107,60 @@
            
        });
  });
+=======
+ }]).controller('loginController', ['$scope', '$filter', '$location', 'users','Auth',function ($scope, $filter, $location, users,Auth) {
+    
+	 $scope.loginButton = function () {
+		 Auth.login($scope.username, $scope.password)
+		  		.success(function (response) {
+			 			$scope.res = response;
+			  			console.log($scope.res);
+					});
+	  };
+    
+	 $scope.signupButton = function () {
+         $location.path("/register");
+     };
+ }])
+	 
+ .controller('registerController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
+
+		 $scope.username = "";
+
+		 $scope.loginButton = function () {
+					$location.path("/login");
+			  };
+	
+		 $scope.signupButton = function () {
+					users.signUp($scope.username, $scope.password, $scope.email)
+						.success(function (response) {
+								$scope.res = response;
+					});
+			  };
+ }])
+	 
+	 
+	 
+	 .controller('checkCart', ['$scope', '$http', function ($scope, $http) {
+ 	$scope.loadProductsInCart = function() {
+ 		 $http.get('http://localhost:8080/api/cart').success(function (response) {
+           $scope.carts = response;
+           $scope.getImagePath = function (imageName) {
+           return "images/" + imageName;
+         };
+     });
+ 	}
+
+     $scope.remove = function (id) {
+	     $http({
+	   		 method: 'DELETE',
+	   		 url: 'http://localhost:8080/api/cart',
+	    	 data: {id : id},
+			  headers: {'Content-Type': 'application/json;charset=utf-8'}
+		 }).then(function successCallback(response) {
+		 	 $scope.loadProductsInCart();
+		     alert(response.data.message);
+  		 });
+     };
+ }]);    
+>>>>>>> refs/remotes/origin/master
