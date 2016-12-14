@@ -17,7 +17,7 @@
     <script src="app/assets/libs/angular-route/angular-route.min.js"></script>
     <script src="app/assets/libs/angular-animate/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- APP -->
     <script src="app/controllers/mainCtrl.js"></script>
     <script src="app/app.routes.js"></script>
@@ -31,6 +31,7 @@
             <div class="pull-left" id="HeaderOneLeft">
                 <button class="btn btn-success btn-sm">OFFER OF THE DAY</button> <a>Get flat 35% off on orders over $50!</a> </div>
             <div class="pull-right" id="HeaderOneRight"> <a href="/register">Sign up</a> <span> |</span> <a href="/login"> Login</a> <span> |</span> <a> Contact</a> <span> |</span> <a href="/index">Home</a> </div>
+            
         </div>
     </div>
     <div id="HeaderTwo">
@@ -60,33 +61,91 @@
                     </ul>
                 </div>
                 <div class="pull-right" id="HeaderTwoRight" ng-controller="checkCart">
-                    <button class="btn pull-right" ng-click="showModal=!showModal; loadProductsInCart()"><span class="glyphicon glyphicon-shopping-cart "></span> Cart</button>
-                    <button class="btn pull-right" ng-click="SearchContainer = !SearchContainer"><span class="glyphicon glyphicon-search"></span></button>
-                    <!-- Modal template -->
-                    <div id="showModal" ng-show="showModal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Check Out</h4> </div>
-                                <div class="modal-body order" ng-repeat="cart in carts">
-                                  <img class="cartimg" ng-src="{{getImagePath(cart.imageName)}}">
-                                    <ul class="list-unstyled cartul">
-                                        <li >{{cart.name}}</li>      
-                                        <li>{{cart.price}}</li>
-                                        <li>{{cart.quantity}}</li>
-                                        <li><a class="btn btn-default" ng-click="remove(cart.cartId)">Remove</a></li>                      
-                                    </ul>
-                                    <hr>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" ng-click="showModal=!showModal">Close</button>
-                                    <button type="button" class="btn btn-primary">Purchase</button>
-                                </div>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="loadProductsInCart()">Cart</button>
+                     <button class="btn pull-right" ng-click="SearchContainer = !SearchContainer"><span class="glyphicon glyphicon-search"></span></button>
+
+                              <!-- Modal -->
+                      <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Cart</h4>
+                            <p>Total Price: {{totalPrice}} | Total Items: {{counter}}</p>
                             </div>
-                        </div>
+                            <div class="modal-body">
+                                 <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row ">
+                             <div class="col-md-2"><a class="btn btn-default" disabled>
+                                        Clear Cart
+                             </a></div>
+                             <div class="col-md-6 filter-cart">
+                                    <input class="form-control" type="text" placeholder="Filter Cart" >
+                             </div>
+                             <div class="col-md-4 proceed-btn">
+                                 <a class="btn btn-primary" href="/checkout"    >Proceed to Checkout</a>
+                             </div>
+                         </div>
                     </div>
-                </div>
-                <!--end of Modal-->
+                    <br>
+                              <div class="table-responsive">
+                                  
+                        <table class="table cart-table">           
+                                <thead>
+                                    <tr>
+                                        <th >#</th>
+                                        <th></th>
+                                        <th >Product<th>
+                                        <th >Price</th>
+                                        <th >Quantity</th>
+                                        
+                                        <th>Remove</th>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                                <tr ng-repeat="cart in carts">
+                                    <td>
+                                        1
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <img style="width:70px;height:100px;" ng-src="{{getImagePath(cart.imageName)}}">
+                                            </a>
+                                    </td>
+                                    <td>
+                                        <a class="a-primary">{{cart.name}}</a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        {{cart.price}}
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control" value="{{1}}">
+                                    </td>
+                                    
+                                    <td>
+                                        <a class="a-primary" ng-click="remove(cart.cartId)"><i class="fa fa-times"></i></a>
+                                    </td>
+                                    
+                                    
+                                </tr>
+                             </tbody>
+                        </table>
+                    </div>
+                            </div>
+                            
+                          </div>
+
+                        </div>
+                      </div>
+                   
+            
+  
             </div>
         </div>
     </div>
