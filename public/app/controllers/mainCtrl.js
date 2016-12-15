@@ -148,26 +148,48 @@
 	 
 	 
 	 
-	 .controller('checkCart', ['$scope', '$http', function ($scope, $http) {
- 	$scope.loadProductsInCart = function() {
- 		 $http.get('http://localhost:8080/api/cart').success(function (response) {
-           $scope.carts = response;
-           $scope.getImagePath = function (imageName) {
-           return "images/" + imageName;
-         };
-     });
- 	}
-
-     $scope.remove = function (id) {
-	     $http({
-	   		 method: 'DELETE',
-	   		 url: 'http://localhost:8080/api/cart',
-	    	 data: {id : id},
-			  headers: {'Content-Type': 'application/json;charset=utf-8'}
-		 }).then(function successCallback(response) {
-		 	 $scope.loadProductsInCart();
-		     alert(response.data.message);
-  		 });
+.controller('checkCart', ['$scope', 'Carts', '$http', function ($scope, Carts, $http) {
+     $scope.loadProductsInCart = function () {
+         Carts.get().then(function (res) {
+             $scope.carts = res.data;
+             $scope.getImagePath = function (imageName) {
+                 return "images/" + imageName;
+             };
+               $scope.counter=0;
+            $scope.totalPrice=0;
+            for(var i=0;i<$scope.carts.length;i++){
+                $scope.totalPrice+=parseInt($scope.carts[i].price);
+                 console.log($scope.carts[i].price);
+               $scope.counter=i+1;
+            }
+             $scope.remove = function (id) {
+                 $http({
+                     method: 'DELETE'
+                   , url: 'http://localhost:8080/api/cart'
+                     , data: {
+                         id: id                     }
+                     , headers: {
+                       'Content-Type': 'application/json;charset=utf-8'
+                  }
+             }).then(function successCallback(response) {
+                     $scope.loadProductsInCart();
+                     console.log(response.data.message);
+                 });
+             };
+         });
      };
- }]);    
-
+  }])
+  
+  .controller('checkoutController',function($scope,Carts){
+        Carts.get().then(function (res) {
+             $scope.carts = res.data;
+            $scope.counter=0;
+            $scope.totalPrice=0;
+            for(var i=0;i<$scope.carts.length;i++){
+                $scope.totalPrice+=parseInt($scope.carts[i].price);
+                 console.log($scope.carts[i].price);
+                $scope.counter=i+1;
+            }
+            
+       });
+ });
