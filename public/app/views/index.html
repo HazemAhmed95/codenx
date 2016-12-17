@@ -30,8 +30,9 @@
         <div class="container">
             <div class="pull-left" id="HeaderOneLeft">
                 <button class="btn btn-success btn-sm">OFFER OF THE DAY</button> <a>Get flat 35% off on orders over $50!</a> </div>
-            <div class="pull-right" id="HeaderOneRight"> <a href="/register">Sign up</a> <span> |</span> <a href="/login"> Login</a> <span> |</span> <a> Contact</a> <span> |</span> <a href="/index">Home</a> </div>
-            
+                
+            <div ng-controller="userNavBar" class="pull-right" id="HeaderOneRight"> <a  ng-click="toSignup()" >{{signup}}</a> <span> |</span> <a ng-click="toLogin()"> {{login}}</a> <span> |</span> <a> Contact</a> <span> |</span> <a href="/index">Home</a> </div>
+			  
         </div>
     </div>
     <div id="HeaderTwo">

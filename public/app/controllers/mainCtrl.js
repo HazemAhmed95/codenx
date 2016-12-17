@@ -36,38 +36,77 @@
          return "images/" + imageName;
      };
      $scope.container = container;
+	
 
  }])
     
-.controller('loginController', ['$scope', '$filter', '$location', 'users','Auth',function ($scope, $filter, $location, users,Auth) {
-     
- 	 $scope.loginButton = function () {
- 		 Auth.login($scope.username, $scope.password)
- 		  		.success(function (response) {
- 			 			$scope.res = response;
- 		  			console.log($scope.res);
- 					});
- 	  };
-     
- 	 $scope.signupButton = function () {
+.controller('loginController', ['$scope', '$filter', '$location', 'users','Auth','$timeout',function ($scope, $filter, $location, users,Auth,$timeout) {
+	
+	 
+	 $scope.loginButton = function () {
+			 Auth.login($scope.username, $scope.password)
+					.success(function (response) {
+					 $scope.res = response;
+						});
+		         if($scope.res.success == true){
+						$timeout(function(){
+						  console.log("yolo");
+						  $location.path("/index");
+					  },2000);
+					}
+		 
+		  };
+
+
+	$scope.signupButton = function () {
            $location.path("/register");
        };
+
+
+
 }])
+ 
+.controller('userNavBar',['$scope','Auth','$rootScope','$location',function($scope,Auth,$rootScope,$location){
+
+		$rootScope.$on('$routeChangeStart', function(){	
+			$scope.login = Auth.logInText;
+			$scope.signup = Auth.signUpText;
+		})
+
+    $scope.toSignup = function(){
+     if(!Auth.logedIn)
+		  $location.path("/register");
+	 }
+	  $scope.toLogin = function(){
+     if(Auth.logedIn)
+		  $location.path("/index");
+		  else 
+			 $location.path("/login");
+	 }
+
+}]) 
+ 
 .controller('registerController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
- 
- 	 $scope.username = "";
- 
- 		 $scope.loginButton = function () {
- 					$location.path("/login");
- 			  };
- 	
- 		 $scope.signupButton = function () {
- 					users.signUp($scope.username, $scope.password, $scope.email)
- 						.success(function (response) {
- 								$scope.res = response;
- 					});
- 			  };
+
+			 $scope.username = "";
+
+			 $scope.loginButton = function () {
+						$location.path("/login");
+				  };
+
+			 $scope.signupButton = function () {
+						users.signUp($scope.username, $scope.password, $scope.email)
+							.success(function (response) {
+									$scope.res = response;
+						});
+				  };
  }])
+ 
+ 
+ 
+ 
+ 
+ 
 .controller('checkCart', ['$scope', 'Carts', '$http', function ($scope, Carts, $http) {
     $scope.loadProductsInCart = function () {
         Carts.get().then(function (res) {
@@ -114,20 +153,21 @@
            
        });
  })
-     
-     .controller('loginController', ['$scope', '$filter', '$location', 'users','Auth',function ($scope, $filter, $location, users,Auth) {
-    
-	 $scope.loginButton = function () {
-		 Auth.login($scope.username, $scope.password)
-		  		.success(function (response) {
-			 			$scope.res = response;
-			  			console.log($scope.res);
-					});
-	  };
-    
-	 $scope.signupButton = function () {
-         $location.path("/register");
-     };
+	
+	 
+.controller('loginController', ['$scope', '$filter', '$location', 'users','Auth',function ($scope, $filter, $location, users,Auth) {
+
+			 $scope.loginButton = function () {
+				 Auth.login($scope.username, $scope.password)
+						.success(function (response) {
+								$scope.res = response;
+								console.log($scope.res);
+							});
+			  };
+
+			 $scope.signupButton = function () {
+					$location.path("/register");
+			  };
  }])
 	 
  .controller('registerController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {

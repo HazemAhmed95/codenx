@@ -41,7 +41,9 @@ angular.module('app.services', [])
 .factory('Auth', function($http, $q, AuthToken) {
 	
 	var authFactory = {};
-	
+	authFactory.signUpText = "Sign up";    
+	authFactory.logInText = "Log in"; 
+	authFactory.logedIn= false;
 	authFactory.login = function(username, password) {
 		return $http.post('http://localhost:8080/api/login', {
 			 username : username,
@@ -49,9 +51,15 @@ angular.module('app.services', [])
 		})
 		.success(function(response){
 			AuthToken.setToken(response.token);
+			if(response.success == true){
+					authFactory.signUpText = username;
+					authFactory.logInText = "Log out";
+					authFactory.logedIn= true;
+						}    
 			return response;
 		})
 	}
+	
 	
 	authFactory.logout = function() { 
   			AuthToken.setToken();
