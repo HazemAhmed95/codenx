@@ -66,20 +66,15 @@
 	$scope.loginButton = function () {
 			
 		
-		Auth.login($scope.username, $scope.password)
-				
+		Auth.login($scope.username, $scope.password)	
 			 .success(function (response) {
-					 
+			
 			 $scope.res = response;
 			//if the login was success redirect the user to the index page		 
-			 if($scope.res.success == true){
-							
+			 if($scope.res.success == true){							
 						 $timeout(function(){
-						   
 							 $location.path("/index");
-							
 						 },1000);
-							
 			 }
 				
 		});
@@ -92,7 +87,6 @@
 
 	
 	$scope.signupButton = function () {
-   
 		$location.path("/register");
       
 	};
@@ -104,21 +98,15 @@
 .controller('userNavBar',['$scope','Auth','$rootScope','$location',function($scope,Auth,$rootScope,$location){
 
 	//on every route change update the text in the user navbar	
-	$rootScope.$on('$routeChangeStart', function(){	
-			
-		$scope.login = Auth.logInText;
-			
-		$scope.signup = Auth.signUpText;
-		
+	$rootScope.$on('$routeChangeStart', function(){				
+		$scope.login = Auth.logInText;	
+		$scope.signup = Auth.signUpText;		
 	})
 
    //the sign up text only redirect if the user is not loged in  
 	$scope.toSignup = function(){
-   
 		if(!Auth.logedIn)
-		
 			$location.path("/register");
-	
 	}
 	//if the user is loged in call the logout function other wise redirect to login page  
 	$scope.toLogin = function(){
@@ -126,38 +114,27 @@
 		if(Auth.logedIn)
 		//call logout
 			
-		  
 		else 
-		
 			$location.path("/login");
-	 
 	}
 
 }]) 
  
 .controller('registerController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
 
-			 
 	$scope.username = "";
 
 			 
-	$scope.loginButton = function () {
-						
-		$location.path("/login");
-				  
+	$scope.loginButton = function () {						
+		$location.path("/login"); 
 	};
 
-			 
-	$scope.signupButton = function () {
-						
+	
+	$scope.signupButton = function () {					
 		users.signUp($scope.username, $scope.password, $scope.email)
-							
 			.success(function (response) {
-									
 			$scope.res = response;
-						
-		});
-				  
+		});		  
 	};
 
 }])
