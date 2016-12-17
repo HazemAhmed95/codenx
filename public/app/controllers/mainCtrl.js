@@ -113,6 +113,7 @@
      
 		if(Auth.logedIn)
 		//call logout
+			conso.log("logout");
 			
 		else 
 			$location.path("/login");
