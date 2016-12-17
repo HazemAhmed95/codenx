@@ -5,7 +5,7 @@
  
 
 	 
-	 .controller('productController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
+.controller('productController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
 
      Product.get().then(function (res) {
          $scope.products = res.data;
@@ -43,17 +43,22 @@
 .controller('loginController', ['$scope', '$filter', '$location', 'users','Auth','$timeout',function ($scope, $filter, $location, users,Auth,$timeout) {
 	
 	 
-	 $scope.loginButton = function () {
-			 Auth.login($scope.username, $scope.password)
-					.success(function (response) {
+	
+	$scope.loginButton = function () {
+			
+		 Auth.login($scope.username, $scope.password)
+				
+				 .success(function (response) {
 					 $scope.res = response;
-						});
-		         if($scope.res.success == true){
-						$timeout(function(){
-						  console.log("yolo");
-						  $location.path("/index");
-					  },2000);
-					}
+					 if($scope.res.success == true){
+							$timeout(function(){
+							 $location.path("/index");
+
+						  },1000);
+						}
+					});
+		  			
+		         
 		 
 		  };
 
@@ -155,81 +160,3 @@
  })
 	
 	 
-.controller('loginController', ['$scope', '$filter', '$location', 'users','Auth',function ($scope, $filter, $location, users,Auth) {
-
-			 $scope.loginButton = function () {
-				 Auth.login($scope.username, $scope.password)
-						.success(function (response) {
-								$scope.res = response;
-								console.log($scope.res);
-							});
-			  };
-
-			 $scope.signupButton = function () {
-					$location.path("/register");
-			  };
- }])
-	 
- .controller('registerController', ['$scope', '$filter', '$location', 'users', function ($scope, $filter, $location, users) {
-
-		 $scope.username = "";
-
-		 $scope.loginButton = function () {
-					$location.path("/login");
-			  };
-	
-		 $scope.signupButton = function () {
-					users.signUp($scope.username, $scope.password, $scope.email)
-						.success(function (response) {
-								$scope.res = response;
-					});
-			  };
- }])
-	 
-	 
-	 
-.controller('checkCart', ['$scope', 'Carts', '$http', function ($scope, Carts, $http) {
-     $scope.loadProductsInCart = function () {
-         Carts.get().then(function (res) {
-             $scope.carts = res.data;
-             $scope.getImagePath = function (imageName) {
-                 return "images/" + imageName;
-             };
-               $scope.counter=0;
-            $scope.totalPrice=0;
-            for(var i=0;i<$scope.carts.length;i++){
-                $scope.totalPrice+=parseInt($scope.carts[i].price);
-                 console.log($scope.carts[i].price);
-               $scope.counter=i+1;
-            }
-             $scope.remove = function (id) {
-                 $http({
-                     method: 'DELETE'
-                   , url: 'http://localhost:8080/api/cart'
-                     , data: {
-                         id: id                     }
-                     , headers: {
-                       'Content-Type': 'application/json;charset=utf-8'
-                  }
-             }).then(function successCallback(response) {
-                     $scope.loadProductsInCart();
-                     console.log(response.data.message);
-                 });
-             };
-         });
-     };
-  }])
-  
-  .controller('checkoutController',function($scope,Carts){
-        Carts.get().then(function (res) {
-             $scope.carts = res.data;
-            $scope.counter=0;
-            $scope.totalPrice=0;
-            for(var i=0;i<$scope.carts.length;i++){
-                $scope.totalPrice+=parseInt($scope.carts[i].price);
-                 console.log($scope.carts[i].price);
-                $scope.counter=i+1;
-            }
-            
-       });
- });

@@ -52,6 +52,7 @@ angular.module('app.services', [])
 		.success(function(response){
 			AuthToken.setToken(response.token);
 			if(response.success == true){
+			
 					authFactory.signUpText = username;
 					authFactory.logInText = "Log out";
 					authFactory.logedIn= true;
