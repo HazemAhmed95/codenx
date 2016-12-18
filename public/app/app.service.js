@@ -83,8 +83,12 @@ angular.module('app.services', [])
 	}
 	
 	
+	
 	authFactory.logout = function() { 
 		AuthToken.setToken();
+		authFactory.signUpText = "Sign up";    
+		authFactory.logInText = "Log in"; 
+		authFactory.logedIn= false;
 	}
 	
 	return authFactory;
@@ -130,7 +134,7 @@ angular.module('app.services', [])
 })
 			
 // application configuration to integrate token into requests
-.factory('AuthInterceptor', function($q, AuthToken){
+.factory('AuthInterceptor', function($q, AuthToken,$location){
 
 
 	var interceptorFactory = {};
@@ -146,11 +150,12 @@ angular.module('app.services', [])
 	 
 		// if the token exists, add it to the header as x-access-token
  	
-		if (token)
+		if (token){
 	 
 			config.headers['x-access-token'] = token;
-	 
-	 
+	    
+		
+		}
 		return config;
 	 
  

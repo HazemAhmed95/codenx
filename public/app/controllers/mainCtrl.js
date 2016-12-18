@@ -95,12 +95,15 @@
 
 }])
  
-.controller('userNavBar',['$scope','Auth','$rootScope','$location',function($scope,Auth,$rootScope,$location){
+.controller('userNavBar',['$scope','Auth','$rootScope','$location','AuthInterceptor',function($scope,Auth,$rootScope,$location,AuthInterceptor){
 
 	//on every route change update the text in the user navbar	
 	$rootScope.$on('$routeChangeStart', function(){				
 		$scope.login = Auth.logInText;	
-		$scope.signup = Auth.signUpText;		
+		$scope.signup = Auth.signUpText;	
+		if(Auth.logedIn){
+			
+		}
 	})
 
    //the sign up text only redirect if the user is not loged in  
@@ -111,10 +114,10 @@
 	//if the user is loged in call the logout function other wise redirect to login page  
 	$scope.toLogin = function(){
      
-		if(Auth.logedIn)
-		//call logout
-			conso.log("logout");
-			
+		if(Auth.logedIn){
+			Auth.logout();
+			$location.path("/");
+		}
 		else 
 			$location.path("/login");
 	}

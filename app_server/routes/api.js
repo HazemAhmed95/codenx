@@ -25,7 +25,7 @@ router.route('/products')
 router.route('/cart')
 
 // when user press add to cart
-.post(function(req, res) {
+.post(verifyUser,function(req, res) {
   // decrementing quantity of product being added to Cart table
   var editQuantityQuery = 'UPDATE Products SET quantity = quantity - 1 WHERE id = ? and quantity > 0';
   connection.query(editQuantityQuery, [req.body.id], function(err, rows) {
@@ -46,7 +46,7 @@ router.route('/cart')
 })
 
 // when user press cart
-.get(function(req, res) {
+.get(verifyUser,function(req, res) {
   // get the data from cart table using the signedInUserId and send it to frontend
   var selectCartsQuery = "SELECT name, price, quantity, imageName, cartId FROM Cart WHERE UserId = ?";
   connection.query(selectCartsQuery, ['hazem'], function(err, rows) {
@@ -59,7 +59,7 @@ router.route('/cart')
 })
 
 // when the user press the x/clear beside the product in the cart
-.delete(function(req, res) {
+.delete(verifyUser,function(req, res) {
   var deleteCartQuery = "DELETE FROM Cart WHERE cartId = ?";
   connection.query(deleteCartQuery, [req.body.id], function(err, result) {
     if(err) {
