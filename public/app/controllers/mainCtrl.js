@@ -5,11 +5,11 @@
  
 
 	 
-.controller('productController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
-
-     
+.controller('productController', ['$scope', 'Product', '$http','$location', function($scope, Product, $http,$location) {
+  
+	
 	Product.get().then(function (res) {
-         
+       
 		  $scope.products = res.data;
    
 		  $scope.getImagePath = function (imageName) {
@@ -95,13 +95,27 @@
 
 }])
  
-.controller('userNavBar',['$scope','Auth','$rootScope','$location','AuthInterceptor',function($scope,Auth,$rootScope,$location,AuthInterceptor){
-
-	//on every route change update the text in the user navbar	
-	$rootScope.$on('$routeChangeStart', function(){				
-		$scope.login = Auth.logInText;	
-		$scope.signup = Auth.signUpText;	
+.controller('userNavBar',['$scope','Auth','$rootScope','$location',function($scope,Auth,$rootScope,$location){
 		
+	//on every route change update the text in the user navbar	
+	$rootScope.$on("$load",function(){
+		alert();
+	})
+	$rootScope.$on('$routeChangeStart', function(){				
+		if(Auth.isLoggedIn()){
+		
+			$scope.login = Auth.logInText;	
+		
+			$scope.signup = Auth.signUpText;	
+		
+	}
+		else {
+		
+			$scope.login = Auth.logInText;	
+		
+			$scope.signup = Auth.signUpText;	
+			
+		}
 	})
 
    //the sign up text only redirect if the user is not loged in  

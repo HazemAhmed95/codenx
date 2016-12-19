@@ -62,16 +62,8 @@ angular.module('app.services', [])
 	authFactory.logedIn= false;
 	
 	authFactory.GetUserName = function(){
-		
-		return {
-      
-			get: function () {
          
-				return $http.get('http://localhost:8080/api/user');
-        
-			}
-    
-		};
+	return $http.get('http://localhost:8080/api/user');
 	
 	}
 	
@@ -88,7 +80,7 @@ angular.module('app.services', [])
 			if(response.success == true){
 				authFactory.signUpText = username;
 				authFactory.logInText = "Log out";
-				authFactory.logedIn= true;		
+				authFactory.logedIn= true;
 			}    
 			
 			return response;
@@ -97,12 +89,32 @@ angular.module('app.services', [])
 	}
 	
 	
+	// check if a user is logged in
+	// checks if there is a local token
+	authFactory.isLoggedIn = function() {
+		if (AuthToken.getToken()) 
+			{  
+				authFactory.GetUserName().success(function (response) {
+				console.log(response.name);
+				authFactory.signUpText = response.name
+			
+				});		
+				
+				authFactory.logInText = "Log out";
+				authFactory.logedIn= true;
+				return true;
+			}
+		else
+			return false;	
+	};
 	
 	authFactory.logout = function() { 
 		AuthToken.setToken();
 		authFactory.signUpText = "Sign up";    
 		authFactory.logInText = "Log in"; 
 		authFactory.logedIn= false;
+
+		
 	}
 	
 	return authFactory;

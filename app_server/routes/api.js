@@ -131,8 +131,10 @@ router.post('/login', function (req, res) {
 router.route('/user')
 
 .get(verifyUser, function (req, res) {
-	
-	res.json({username:req.decoded});
+	console.log("from users : "+req.decoded);
+	res.json({
+		name:req.decoded
+	})
 	
 })
 
