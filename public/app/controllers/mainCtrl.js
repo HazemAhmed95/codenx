@@ -5,7 +5,7 @@
  
 
 	 
-.controller('productController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
+.controller('productController', ['$scope', 'Product', 'Carts', '$http', function($scope, Product, Carts, $http) {
 
      
 	Product.get().then(function (res) {
@@ -25,25 +25,34 @@
 		}
         
       
-		$scope.addToCart = function (id) {
-      
+		$scope.addToCart = function (productId) {
+      		
+      		var productIdx;
+      		var addedProduct = {};
+
+			for(var i = 0; i < container.length; i++) {
+				if(container[i].id === productId) {
+					productIdx = i;
+					addedProduct = container[i];
+					break;
+				}
+			}
 		
-		
-			if (container[id].quantity > 0) {
+			if (addedProduct.quantity > 0) {
                 
-					$scope.products[id].quantity--;
-               
-					$http.post('http://localhost:8080/api/cart', container[id]).success(function (res) {
-               
-					console.log(res.message);
-                
+					addedProduct.quantity--;
+
+					$scope.products[productIdx].quantity--; 
+
+					Carts.post(addedProduct).success(function(response){
+						console.log(response.message);
 					});
-             
+
 				}
             
 				else {
-            
-					alert("La2");
+            		// todo : handel using bootstrap alert
+					alert("Out Of Stock");
              }
          };
      });
