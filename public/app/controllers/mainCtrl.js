@@ -101,9 +101,7 @@
 	$rootScope.$on('$routeChangeStart', function(){				
 		$scope.login = Auth.logInText;	
 		$scope.signup = Auth.signUpText;	
-		if(Auth.logedIn){
-			
-		}
+		
 	})
 
    //the sign up text only redirect if the user is not loged in  

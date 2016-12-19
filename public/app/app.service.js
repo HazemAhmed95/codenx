@@ -61,6 +61,20 @@ angular.module('app.services', [])
 	authFactory.logInText = "Log in"; 
 	authFactory.logedIn= false;
 	
+	authFactory.GetUserName = function(){
+		
+		return {
+      
+			get: function () {
+         
+				return $http.get('http://localhost:8080/api/user');
+        
+			}
+    
+		};
+	
+	}
+	
 	authFactory.login = function(username, password) {
 	
 		return $http.post('http://localhost:8080/api/login', {

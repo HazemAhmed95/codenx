@@ -34,7 +34,7 @@ router.route('/cart')
     } else {
       // adding product data to Cart table
       var insertToCartQuery = 'INSERT INTO Cart (name, price, quantity, imageName, UserId) values(?, ?, ?, ?, ?);'
-      connection.query(insertToCartQuery, [req.body.name, req.body.price, req.body.quantity, req.body.imageName, 'hazem'], function(err, rows) {
+      connection.query(insertToCartQuery, [req.body.name, req.body.price, req.body.quantity, req.body.imageName, req.decoded], function(err, rows) {
         if(err) {
           throw err;
         } else {
@@ -49,7 +49,7 @@ router.route('/cart')
 .get(verifyUser,function(req, res) {
   // get the data from cart table using the signedInUserId and send it to frontend
   var selectCartsQuery = "SELECT name, price, quantity, imageName, cartId FROM Cart WHERE UserId = ?";
-  connection.query(selectCartsQuery, ['hazem'], function(err, rows) {
+  connection.query(selectCartsQuery, req.decoded, function(err, rows) {
     if(err) {
       throw err;
     } else {
@@ -123,6 +123,19 @@ router.post('/login', function (req, res) {
 		}
 	});
 });
+
+////////////////////////
+// Get The user Name////
+///////////////////////
+
+router.route('/user')
+
+.get(verifyUser, function (req, res) {
+	
+	res.json({username:req.decoded});
+	
+})
+
 
 ////////////////////////////////////////
 ///route middleware to verify a token///
