@@ -47,6 +47,9 @@ angular.module('app.services', [])
     return {
         get: function () {
             return $http.get('http://localhost:8080/api/cart');
+        },
+        post: function(addedProduct) {
+        	return $http.post('http://localhost:8080/api/cart', addedProduct);
         }
     };
 })
