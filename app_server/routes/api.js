@@ -26,21 +26,12 @@ router.route('/cart')
 
 // when user press add to cart
 .post(verifyUser,function(req, res) {
-  // decrementing quantity of product being added to Cart table
-  var editQuantityQuery = 'UPDATE Products SET quantity = quantity - 1 WHERE id = ? and quantity > 0';
-  connection.query(editQuantityQuery, [req.body.id], function(err, rows) {
+  var insertToCartQuery = 'INSERT INTO Cart (name, price, imageName, UserId) values(?, ?, ?, ?);'
+  connection.query(insertToCartQuery, [req.body.name, req.body.price, req.body.imageName, req.decoded], function(err, rows) {
     if(err) {
       throw err;
     } else {
-      // adding product data to Cart table
-      var insertToCartQuery = 'INSERT INTO Cart (name, price, quantity, imageName, UserId) values(?, ?, ?, ?, ?);'
-      connection.query(insertToCartQuery, [req.body.name, req.body.price, req.body.quantity, req.body.imageName, req.decoded], function(err, rows) {
-        if(err) {
-          throw err;
-        } else {
-          res.json({message: 'Successfully added to cart'});
-        }
-      });
+      res.json({message: 'Successfully added to cart'});
     }
   });
 })
@@ -48,7 +39,7 @@ router.route('/cart')
 // when user press cart
 .get(verifyUser,function(req, res) {
   // get the data from cart table using the signedInUserId and send it to frontend
-  var selectCartsQuery = "SELECT name, price, quantity, imageName, cartId FROM Cart WHERE UserId = ?";
+  var selectCartsQuery = "SELECT name, price, imageName, cartId FROM Cart WHERE UserId = ?";
   connection.query(selectCartsQuery, req.decoded, function(err, rows) {
     if(err) {
       throw err;

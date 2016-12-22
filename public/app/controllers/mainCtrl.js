@@ -30,30 +30,18 @@
       		var productIdx;
       		var addedProduct = {};
 
-			for(var i = 0; i < container.length; i++) {
-				if(container[i].id === productId) {
-					productIdx = i;
-					addedProduct = container[i];
-					break;
-				}
-			}
-		
-			if (addedProduct.quantity > 0) {
-                
-					addedProduct.quantity--;
+    			for(var i = 0; i < container.length; i++) {
+    				if(container[i].id === productId) {
+    					productIdx = i;
+    					addedProduct = container[i];
+    					break;
+    				}
+    			}
 
-					$scope.products[productIdx].quantity--; 
+    			Carts.post(addedProduct).success(function(response){
+    				console.log(response.message);
+    			});
 
-					Carts.post(addedProduct).success(function(response){
-						console.log(response.message);
-					});
-
-				}
-            
-				else {
-            		// todo : handel using bootstrap alert
-					alert("Out Of Stock");
-             }
          };
      });
  }])
